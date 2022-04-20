@@ -11,6 +11,8 @@ DEBUG = -fsanitize=address
 
 CFLAGS = -Wall -Wextra -Werror -g3 
 
+THREAD = -pthread
+
 OPTI = -O3 -flto
 
 NAME = philo
@@ -20,12 +22,12 @@ INC_DIR = inc
 PATH_LIBFT = ./libft
 
 %.o: %.c
-		$(CC) $(CFLAGS) -I ${INC_DIR} -c $< -o $@
+		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@
 
 all: $(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC)  $(CFLAGS) $(OBJ) -o $(NAME)
+			$(CC) $(CFLAGS) ${THREAD} $(OBJ) -o $(NAME)
 
 clean:
 		rm -f $(OBJ)
