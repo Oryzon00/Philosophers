@@ -1,7 +1,14 @@
-SRC = src/main.c \
+SRC =	src/main.c \
+		src/singleton.c \
+		src/utils.c \
+		src/routine.c \
+		src/check_input.c \
+		src/not_libft/ft_atoi.c \
+		src/not_libft/ft_strlen.c \
+		src/not_libft/ft_putstr.c \
+		src/not_libft/ft_bzero.c \
 
 
-#src/multi_pipex.c \ 
 
 OBJ = $(SRC:.c=.o)
 
@@ -19,8 +26,6 @@ NAME = philo
 
 INC_DIR = inc
 
-PATH_LIBFT = ./libft
-
 %.o: %.c
 		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@
 
@@ -37,4 +42,7 @@ fclean:	clean
 
 re:		fclean $(NAME)
 
-.PHONY:		all clean fclean re 
+test:
+		valgrind --tool=helgrind ./$(NAME) 10
+
+.PHONY:		all clean fclean re test
