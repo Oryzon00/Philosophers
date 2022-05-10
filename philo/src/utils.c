@@ -6,35 +6,33 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:12:38 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/09 20:25:08 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/10 17:21:59 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-int	init_data(int argc, char **argv, pthread_mutex_t *mutex, int *compteur)
+int	printf_mutex(int philo_nb, int *compteur)
 {
-	t_data			*data;
-	t_philo			*philo;
-	int				i;
+	t_data	*data;
 
-	(void) argc;
 	data = _data();
-	data->nb_philo = ft_atoi(argv[1]);
-	data->philo = malloc(sizeof(t_philo) * data->nb_philo);
-	if (!data->philo)
-		return (FAILURE);
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		philo = _philo(i);
-		philo->nb = i + 1;
-		i++;
-	}
-	*compteur = 0;
-	data->compteur = compteur;
-	pthread_mutex_init(mutex, NULL);
-	data->mutex = mutex;
+	pthread_mutex_lock(&(data->mutex.printf));
+	printf("I am philo number %d\n", philo_nb);
+	pthread_mutex_lock(&(data->mutex.compteur));
+	printf("compteur = %d\n", *compteur);
+	pthread_mutex_unlock(&(data->mutex.compteur));
+	pthread_mutex_unlock(&(data->mutex.printf));
+	return (SUCCESS);
+}
+
+int	compteur_mutex()
+{
+	t_data	*data;
+
+	data = _data();
+	pthread_mutex_lock(&(data->mutex.compteur));
+	(*data->compteur)++;
+	pthread_mutex_unlock(&(data->mutex.compteur));
 	return (SUCCESS);
 }

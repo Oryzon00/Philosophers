@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/09 20:24:10 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/10 19:16:26 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,18 @@ typedef struct s_philo
 	pthread_t		id;
 }	t_philo;
 
+typedef struct s_mutex
+{
+	pthread_mutex_t	printf;
+	pthread_mutex_t	compteur;
+}	t_mutex;
+
 typedef struct s_data
 {
 	t_philo			*philo;
 	int				*compteur;
-	pthread_mutex_t	*mutex;
 	int				nb_philo;
+	t_mutex			mutex;
 }	t_data;
 
 //SINGLETON
@@ -42,19 +48,22 @@ t_data	*_data(void);
 t_philo	*_philo(int i);
 
 //UTILS
-int	init_data(int argc, char **argv, pthread_mutex_t *mutex, int *compteur);
+int	printf_mutex(int philo_nb, int *compteur);
+int	compteur_mutex();
+
 
 //CHECK INPUT
-int	check_input(int argc, char ** argv);
+int		check_input(int argc, char ** argv);
 
-
+//INIT_DATA
+int	init_data(int argc, char **argv, int *compteur);
 //ROUTINE
 void	*ft_routine(void *philo_ptr);
 
 //NOT_LIBFT
-int	ft_putstr(char *str);
-int	ft_strlen(char *str);
-int	ft_atoi(const char *nptr);
+int		ft_putstr(char *str);
+int		ft_strlen(char *str);
+int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 
 #endif
