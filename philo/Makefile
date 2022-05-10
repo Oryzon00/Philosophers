@@ -3,6 +3,7 @@ SRC =	src/main.c \
 		src/utils.c \
 		src/routine.c \
 		src/check_input.c \
+		src/init_data.c \
 		src/not_libft/ft_atoi.c \
 		src/not_libft/ft_strlen.c \
 		src/not_libft/ft_putstr.c \
@@ -43,6 +44,6 @@ fclean:	clean
 re:		fclean $(NAME)
 
 test:
-		valgrind --tool=helgrind ./$(NAME) 10
+		valgrind --tool=helgrind ./$(NAME) 100
 
 .PHONY:		all clean fclean re test
