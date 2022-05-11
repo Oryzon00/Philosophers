@@ -4,11 +4,12 @@ SRC =	src/main.c \
 		src/routine.c \
 		src/check_input.c \
 		src/init_data.c \
+		src/free_data.c \
+		src/thread.c \
 		src/not_libft/ft_atoi.c \
 		src/not_libft/ft_strlen.c \
 		src/not_libft/ft_putstr.c \
 		src/not_libft/ft_bzero.c \
-
 
 
 OBJ = $(SRC:.c=.o)
@@ -44,6 +45,6 @@ fclean:	clean
 re:		fclean $(NAME)
 
 test:
-		valgrind --tool=helgrind ./$(NAME) 100
+		valgrind --tool=helgrind ./$(NAME) 200 60 60 60
 
 .PHONY:		all clean fclean re test
