@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/10 19:16:26 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/11 16:46:51 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define SUCCESS 0
 # define FAILURE 1
+# define ATOI_FAILURE -1
 
 typedef struct s_philo
 {
@@ -62,7 +63,7 @@ void	*ft_routine(void *philo_ptr);
 
 //NOT_LIBFT
 int		ft_putstr(char *str);
-int		ft_strlen(char *str);
+int		ft_strlen(const char *str);
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 

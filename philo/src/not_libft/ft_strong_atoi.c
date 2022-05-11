@@ -1,42 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strong_atoi.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 18:38:56 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 17:10:33 by ajung            ###   ########.fr       */
+/*   Created: 2022/05/11 16:19:12 by ajung             #+#    #+#             */
+/*   Updated: 2022/05/11 16:25:21 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+/* #include "philo.h"
+
+void	error_and_exit(void)
+{
+	write(2, "Error\n", 6);
+	exit (0);
+}
+
+void	check_overflow(long long output, int sign)
+{
+	if (output * sign > 2147483647)
+		error_and_exit();
+	else if (output * sign < -2147483648)
+		error_and_exit();
+}
+
+void	check_multiple_sign(char c)
+{
+	if ((c == '-') || (c == '+'))
+		error_and_exit();
+}
 
 int	ft_atoi(const char *nptr)
 {
 	int				i;
 	long long		output;
+	int				sign;
 
 	i = 0;
 	output = 0;
+	sign = 1;
 	if (ft_strlen(nptr) > 11)
-		return (ATOI_FAILURE);
+		error_and_exit();
 	while (((9 <= nptr[i]) && (nptr[i] <= 13)) || (nptr[i] == ' '))
 		i++;
 	if ((nptr[i] == '-') || (nptr[i] == '+'))
-		return (ATOI_FAILURE);
-	if (!('0' <= nptr[i]) && (nptr[i] <= '9'))
-		return (ATOI_FAILURE);
+	{
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
+	}
+	check_multiple_sign(nptr[i]);
 	while (('0' <= nptr[i]) && (nptr[i] <= '9'))
 	{
 		output = nptr[i] - '0' + (output * 10);
 		i++;
-		if (output > 2147483647)
-			return (ATOI_FAILURE);
-		else if (output < -2147483648)
-			return (ATOI_FAILURE);
+		check_overflow(output, sign);
 	}
-	if (nptr[i] != '\0')
-		return (ATOI_FAILURE);
-	return (output);
+	return (output * sign);
 }
+ */
