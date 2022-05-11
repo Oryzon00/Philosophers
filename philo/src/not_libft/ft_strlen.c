@@ -6,13 +6,13 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:38:09 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/09 18:38:45 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/11 16:45:01 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "philo.h"
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 

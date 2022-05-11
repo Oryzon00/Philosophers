@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:23:45 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/10 19:12:36 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/11 16:49:32 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int	join_thread(void)
 
 int main(int argc, char **argv)
 {
-	int				compteur;
+	int		compteur;
 
 	if (check_input(argc, argv) == FAILURE)
 		return (FAILURE);
+	ft_putstr("Params are okay\n");
+	return (SUCCESS);
 	init_data(argc, argv, &compteur);
 	create_thread();
 	join_thread();
