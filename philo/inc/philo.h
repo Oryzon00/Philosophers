@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 16:46:51 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/11 21:08:24 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@
 # define SUCCESS 0
 # define FAILURE 1
 # define ATOI_FAILURE -1
+# define TRUE 1
+# define FALSE 0
 
 typedef struct s_philo
 {
 	int				nb;
 	pthread_t		id;
+	int				have_eaten;
 }	t_philo;
 
 typedef struct s_mutex
@@ -39,9 +42,14 @@ typedef struct s_mutex
 typedef struct s_data
 {
 	t_philo			*philo;
-	int				*compteur;
-	int				nb_philo;
 	t_mutex			mutex;
+	int				philo_is_dead;
+	int				nb_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				max_eat;
+	int				argc;
 }	t_data;
 
 //SINGLETON
@@ -49,15 +57,15 @@ t_data	*_data(void);
 t_philo	*_philo(int i);
 
 //UTILS
-int	printf_mutex(int philo_nb, int *compteur);
-int	compteur_mutex();
+int	printf_mutex(int philo_nb);
 
 
 //CHECK INPUT
 int		check_input(int argc, char ** argv);
 
 //INIT_DATA
-int	init_data(int argc, char **argv, int *compteur);
+int	init_data(int argc, char **argv);
+
 //ROUTINE
 void	*ft_routine(void *philo_ptr);
 
@@ -67,7 +75,15 @@ int		ft_strlen(const char *str);
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 
+//FREE DATA
+void	free_data(void);
+
+//THREAD
+int	init_thread(void);
+int	join_thread(void);
+
 #endif
+
 //typedef	struct timeval t_timeval;
 
 /* 

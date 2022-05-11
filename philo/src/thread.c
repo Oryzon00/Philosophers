@@ -1,43 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 17:12:38 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 21:35:43 by ajung            ###   ########.fr       */
+/*   Created: 2022/05/11 19:56:23 by ajung             #+#    #+#             */
+/*   Updated: 2022/05/11 19:57:35 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-//printf is sleeping
-//printf is eating
-//printf has take a fork
-//printf is thinking
-//print has died
-
-int	printf_mutex(int philo_nb, int timestamp)
+int	init_thread(void)
 {
+	int		i;
 	t_data	*data;
+	t_philo	*philo;
 
 	data = _data();
-	pthread_mutex_lock(&(data->mutex.printf));
-	printf("%d philo %d is sleeping", philo_nb);
-	pthread_mutex_unlock(&(data->mutex.printf));
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		philo = _philo(i);
+		philo->nb = i + 1;
+		pthread_create(&(philo->id), NULL, &ft_routine, philo);
+		i++;
+	}
 	return (SUCCESS);
 }
 
-/* int	compteur_mutex()
+int	join_thread(void)
 {
+	int		i;
+	t_philo	*philo;
 	t_data	*data;
 
 	data = _data();
-	pthread_mutex_lock(&(data->mutex.compteur));
-	(*data->compteur)++;
-	pthread_mutex_unlock(&(data->mutex.compteur));
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		philo = _philo(i);
+		pthread_join(philo->id, NULL);
+		i++;
+	}
 	return (SUCCESS);
 }
- */

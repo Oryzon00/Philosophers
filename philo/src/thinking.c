@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   thinking.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 19:23:45 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 20:09:55 by ajung            ###   ########.fr       */
+/*   Created: 2022/05/11 21:21:12 by ajung             #+#    #+#             */
+/*   Updated: 2022/05/11 21:24:41 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include <philo.h>
 
-int main(int argc, char **argv)
+void	thinking(t_philo *philo)
 {
-	if (check_input(argc, argv) == FAILURE)
-		return (FAILURE);
-	ft_putstr("Params are okay\n");
-	if (init_data(argc, argv) == FAILURE)
-		return (FAILURE);
-	init_thread();
-	join_thread();
-	free_data();
-	return (SUCCESS);
-
+	printf_mutex(philo->nb);
+	usleep()
 }
