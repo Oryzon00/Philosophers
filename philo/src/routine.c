@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:16:06 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 21:20:39 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/13 18:43:23 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int not_dead_and_must_eat(t_philo *philo)
 {
 	t_data	*data;
 
-	data = _data;
-	//mutex data ici
+	data = _data();
 	if (data->argc == 5)
 	{
 		if (data->philo_is_dead == TRUE)
@@ -41,7 +40,7 @@ void	*ft_routine(void *philo_ptr)
 	philo->have_eaten = 0;
 	while (not_dead_and_must_eat(philo) == SUCCESS)
 	{
-		
+		break ;
 	}
 	
 	return (NULL);

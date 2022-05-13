@@ -1,11 +1,12 @@
 SRC =	src/main.c \
 		src/singleton.c \
-		src/utils.c \
+		src/philo_action.c \
 		src/routine.c \
 		src/check_input.c \
 		src/init_data.c \
 		src/free_data.c \
 		src/thread.c \
+		src/time_utils.c \
 		src/not_libft/ft_atoi.c \
 		src/not_libft/ft_strlen.c \
 		src/not_libft/ft_putstr.c \
