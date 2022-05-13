@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 21:08:24 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/13 20:26:08 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # define TRUE 1
 # define FALSE 0
 
+typedef struct timeval t_timeval;
+
+typedef struct s_time_start
+{
+	int	start_sec;
+	int	start_ms;
+}	t_time_start;
+
 typedef struct s_philo
 {
 	int				nb;
@@ -43,6 +51,7 @@ typedef struct s_data
 {
 	t_philo			*philo;
 	t_mutex			mutex;
+	t_time_start	time;
 	int				philo_is_dead;
 	int				nb_philo;
 	int				time_to_die;
@@ -56,9 +65,14 @@ typedef struct s_data
 t_data	*_data(void);
 t_philo	*_philo(int i);
 
-//UTILS
-int	printf_mutex(int philo_nb);
+//PHILO ACTION
+int	philo_sleeping(int philo_nb);
+int	philo_eating(int philo_nb);
+int	philo_take_fork(int philo_nb);
+int	philo_thinking(int philo_nb);
+int	philo_died(int philo_nb);
 
+TIME UTILSint	init_start_time(void);
 
 //CHECK INPUT
 int		check_input(int argc, char ** argv);
@@ -83,32 +97,3 @@ int	init_thread(void);
 int	join_thread(void);
 
 #endif
-
-//typedef	struct timeval t_timeval;
-
-/* 
-struct timeval {
-    time_t      tv_sec;  --> secondes
-    suseconds_t tv_usec; --> microsecondes
-}; 
-
-
-int gettimeofday(struct timeval *tv, NULL);
-
-int pthread_create(pthread_t *restrict thread,
-                          const pthread_attr_t *restrict attr,
-                          void *(*start_routine)(void *),
-                          void *restrict arg);
-
-*/
-/* int	main(void)
-{
-	t_timeval test;
-	
-	gettimeofday(&test, NULL);
-	printf("%ld secondes depuis 1/1/1970\n",
-		test.tv_sec);
-	printf("%ld micro sec depuis derniere seconde\n",test.tv_usec);
-	
-	return (0);
-} */
