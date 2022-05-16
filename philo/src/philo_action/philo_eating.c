@@ -1,49 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   philo_eating.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 19:56:23 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/16 20:35:04 by ajung            ###   ########.fr       */
+/*   Created: 2022/05/16 21:00:40 by ajung             #+#    #+#             */
+/*   Updated: 2022/05/16 21:11:11 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_thread(void)
+
+static int	update_time_last_meal(int philo_nb)
 {
-	int		i;
-	t_data	*data;
-	t_philo	*philo;
+	t_data		*data;
+	t_timeval	time_now;
 
 	data = _data();
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		philo = _philo(i);
-		philo->nb = i + 1;
-		pthread_create(&(philo->id), NULL, &ft_routine, philo);
-		i++;
-	}
+	pthread_mutex_lock(&(data->mutex.time_last_meal));
+	gettimeofday(&time_now, NULL);
+	(data->philo[philo_nb - 1]).time_last_meal = time_now.tv_usec / 1000;
+	pthread_mutex_unlock(&(data->mutex.time_last_meal));
 	return (SUCCESS);
 }
 
-int	join_thread(void)
+int	philo_eating(int philo_nb)
 {
-	int		i;
-	t_philo	*philo;
-	t_data	*data;
+	t_data		*data;
 
 	data = _data();
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		philo = _philo(i);
-		dprintf(2, "philo %d id = %lu\n", i, philo->id);
-		pthread_join(philo->id, NULL);
-		i++;
-	}
+	philo_printf_eating(philo_nb);
+	update_time_last_meal(philo_nb);
+	usleep(data->time_to_eat);
 	return (SUCCESS);
 }
