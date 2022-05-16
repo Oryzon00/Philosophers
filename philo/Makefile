@@ -1,6 +1,5 @@
 SRC =	src/main.c \
 		src/singleton.c \
-		src/philo_action.c \
 		src/routine.c \
 		src/check_input.c \
 		src/init_data.c \
@@ -11,7 +10,12 @@ SRC =	src/main.c \
 		src/not_libft/ft_strlen.c \
 		src/not_libft/ft_putstr.c \
 		src/not_libft/ft_bzero.c \
-
+		src/philo_action/philo_printf.c \
+		src/philo_action/philo_died.c \
+		src/philo_action/philo_thinking.c \
+		src/philo_action/philo_take_fork.c \
+		src/philo_action/philo_sleeping.c \
+		src/philo_action/philo_eating.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -46,6 +50,9 @@ fclean:	clean
 re:		fclean $(NAME)
 
 test:
-		valgrind --tool=helgrind ./$(NAME) 200 60 60 60
+		valgrind --tool=helgrind ./$(NAME) 10 60 60 60
+
+test_leaks:
+		valgrind ./$(NAME) 10 60 60 60
 
 .PHONY:		all clean fclean re test

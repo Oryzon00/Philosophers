@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/13 20:26:08 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/16 21:08:38 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ typedef struct timeval t_timeval;
 
 typedef struct s_time_start
 {
-	int	start_sec;
-	int	start_ms;
+	unsigned long	start_sec;
+	unsigned long	start_ms;
 }	t_time_start;
 
 typedef struct s_philo
@@ -39,12 +39,14 @@ typedef struct s_philo
 	int				nb;
 	pthread_t		id;
 	int				have_eaten;
+	int				time_last_meal;
+
 }	t_philo;
 
 typedef struct s_mutex
 {
 	pthread_mutex_t	printf;
-	pthread_mutex_t	compteur;
+	pthread_mutex_t	time_last_meal;
 }	t_mutex;
 
 typedef struct s_data
@@ -72,10 +74,19 @@ int	philo_take_fork(int philo_nb);
 int	philo_thinking(int philo_nb);
 int	philo_died(int philo_nb);
 
-TIME UTILSint	init_start_time(void);
+//PHILO PRINTF
+int	philo_printf_sleeping(int philo_nb);
+int	philo_printf_eating(int philo_nb);
+int	philo_printf_take_fork(int philo_nb);
+int	philo_printf_thinking(int philo_nb);
+int	philo_printf_died(int philo_nb);
+
+// TIME UTILS
+int	init_start_time(void);
+int	get_timestamp(void);
 
 //CHECK INPUT
-int		check_input(int argc, char ** argv);
+int	check_input(int argc, char ** argv);
 
 //INIT_DATA
 int	init_data(int argc, char **argv);

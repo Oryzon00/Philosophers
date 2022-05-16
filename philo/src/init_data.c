@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:16:15 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 21:13:06 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/16 20:28:14 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	init_mutex()
 
 	data = _data();
 	pthread_mutex_init(&(data->mutex.printf), NULL);
+	pthread_mutex_init(&(data->mutex.time_last_meal), NULL);
+
 	return (SUCCESS);
 	
 }
@@ -77,5 +79,6 @@ int	init_data(int argc, char **argv)
 	init_time_to(argv, argc);
 	init_mutex();
 	init_divers(argc);
+	init_start_time();
 	return (SUCCESS);
 }

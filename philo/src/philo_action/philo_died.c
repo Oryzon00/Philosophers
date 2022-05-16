@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thinking.c                                         :+:      :+:    :+:   */
+/*   philo_died.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 21:21:12 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 21:24:41 by ajung            ###   ########.fr       */
+/*   Created: 2022/05/16 20:56:32 by ajung             #+#    #+#             */
+/*   Updated: 2022/05/16 20:56:54 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
-void	thinking(t_philo *philo)
+int	philo_died(int philo_nb)
 {
-	printf_mutex(philo->nb);
-	usleep()
+	philo_printf_died(philo_nb);
+	return (SUCCESS);
 }
