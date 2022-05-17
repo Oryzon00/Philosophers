@@ -16,6 +16,8 @@ SRC =	src/main.c \
 		src/philo_action/philo_take_fork.c \
 		src/philo_action/philo_sleeping.c \
 		src/philo_action/philo_eating.c \
+		src/check_dead.c \
+		src/mutex/check_status_philo_is_dead.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -32,6 +34,8 @@ OPTI = -O3 -flto
 NAME = philo
 
 INC_DIR = inc
+
+ARG_PHILO = 5 1000 10000 201
 
 %.o: %.c
 		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@
@@ -50,9 +54,13 @@ fclean:	clean
 re:		fclean $(NAME)
 
 test:
-		valgrind --tool=helgrind ./$(NAME) 10 60 60 60
+		./$(NAME) $(ARG_PHILO)
+
+test_mutex:
+		valgrind --tool=helgrind ./$(NAME) $(ARG_PHILO)
 
 test_leaks:
-		valgrind ./$(NAME) 10 60 60 60
+		valgrind ./$(NAME) $(ARG_PHILO)
+	
 
-.PHONY:		all clean fclean re test
+.PHONY:		all clean fclean re test test_mutex test_leaks

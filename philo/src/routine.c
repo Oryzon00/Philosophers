@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:16:06 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/16 18:39:33 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/17 21:23:47 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,32 @@ int not_dead_and_must_eat(t_philo *philo)
 	return (SUCCESS);
 }
 
+
 void	*ft_routine(void *philo_ptr)
 {
 	t_data	*data;
 	t_philo *philo;
+	int		philo_dead;
 
 	data = _data();
 	philo = philo_ptr;
-	philo->have_eaten = 0;
+	philo_dead = FALSE;
 	while (not_dead_and_must_eat(philo) == SUCCESS)
 	{
-		philo_thinking(philo->nb);
+		philo_thinking(philo);
+		if (check_status_philo_is_dead(data) == TRUE)
+			break ;
 		usleep(1000);
-		philo_eating(philo->nb);
+		philo_eating(philo);
+		if (check_status_philo_is_dead(data) == TRUE)
+			break ;
 		usleep(1000);
-		philo_sleeping(philo->nb);
-		usleep(1000); 
-		philo_died(philo->nb);
+		philo_sleeping(philo);
+		if (check_status_philo_is_dead(data) == TRUE)
+			break ;
 		usleep(1000);
-		break ;
 	}
-	
+	if (philo->have_eaten >= data->max_eat)
+		philo->finish_eating = TRUE;
 	return (NULL);
 }
