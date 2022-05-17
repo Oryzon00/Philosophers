@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:28:35 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/16 18:30:12 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/17 21:01:15 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ◦ timestamp_in_ms X died 
 */
 
-int	philo_printf_sleeping(int philo_nb)
+int	philo_printf_sleeping(t_philo *philo)
 {
 	t_data	*data;
 	int		timestamp;
@@ -29,12 +29,12 @@ int	philo_printf_sleeping(int philo_nb)
 	data = _data();
 	pthread_mutex_lock(&(data->mutex.printf));
 	timestamp = get_timestamp();
-	printf("%d \tphilo %d is sleeping\n", timestamp, philo_nb);
+	printf("%d \tphilo %d is sleeping\n", timestamp, philo->nb);
 	pthread_mutex_unlock(&(data->mutex.printf));
 	return (SUCCESS);
 }
 
-int	philo_printf_eating(int philo_nb)
+int	philo_printf_eating(t_philo *philo)
 {
 	t_data	*data;
 	int		timestamp;
@@ -42,12 +42,12 @@ int	philo_printf_eating(int philo_nb)
 	data = _data();
 	pthread_mutex_lock(&(data->mutex.printf));
 	timestamp = get_timestamp();
-	printf("%d \tphilo %d is eating\n", timestamp, philo_nb);
+	printf("%d \tphilo %d is eating\n", timestamp, philo->nb);
 	pthread_mutex_unlock(&(data->mutex.printf));
 	return (SUCCESS);
 }
 
-int	philo_printf_take_fork(int philo_nb)
+int	philo_printf_take_fork(t_philo *philo)
 {
 	t_data	*data;
 	int		timestamp;
@@ -55,12 +55,12 @@ int	philo_printf_take_fork(int philo_nb)
 	data = _data();
 	pthread_mutex_lock(&(data->mutex.printf));
 	timestamp = get_timestamp();
-	printf("%d \tphilo %d has taken a fork\n", timestamp, philo_nb);
+	printf("%d \tphilo %d has taken a fork\n", timestamp, philo->nb);
 	pthread_mutex_unlock(&(data->mutex.printf));
 	return (SUCCESS);
 }
 
-int	philo_printf_thinking(int philo_nb)
+int	philo_printf_thinking(t_philo *philo)
 {
 	t_data	*data;
 	int		timestamp;
@@ -68,20 +68,20 @@ int	philo_printf_thinking(int philo_nb)
 	data = _data();
 	pthread_mutex_lock(&(data->mutex.printf));
 	timestamp = get_timestamp();
-	printf("%d \tphilo %d is thinking\n", timestamp, philo_nb);
+	printf("%d \tphilo %d is thinking\n", timestamp, philo->nb);
 	pthread_mutex_unlock(&(data->mutex.printf));
 	return (SUCCESS);
 }
 
-int	philo_printf_died(int philo_nb)
+int	philo_printf_died(t_philo *philo)
 {
 	t_data	*data;
 	int		timestamp;
 
 	data = _data();
-	pthread_mutex_lock(&(data->mutex.printf));
+	//pthread_mutex_lock(&(data->mutex.printf));
 	timestamp = get_timestamp();
-	printf("%d \tphilo %d died\n", timestamp, philo_nb);
+	printf("%d \tphilo %d died\n", timestamp, philo->nb);
 	pthread_mutex_unlock(&(data->mutex.printf));
 	return (SUCCESS);
 }

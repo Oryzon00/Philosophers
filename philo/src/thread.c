@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 19:56:23 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/16 20:35:04 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/17 16:09:19 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	join_thread(void)
 	while (i < data->nb_philo)
 	{
 		philo = _philo(i);
-		dprintf(2, "philo %d id = %lu\n", i, philo->id);
 		pthread_join(philo->id, NULL);
 		i++;
 	}

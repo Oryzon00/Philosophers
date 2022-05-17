@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:16:15 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/16 20:28:14 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/17 21:05:37 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,29 @@ int	init_mutex()
 	
 }
 
+static int	init_philo_data(void)
+{
+	t_philo	*philo;
+	t_data	*data;
+	int		i;
+	
+	i = 0;
+	data = _data();
+	while (i < data->nb_philo)
+	{
+		philo = _philo(i);
+		philo->index = i;
+		philo->nb = i + 1;
+		philo->finish_eating = FALSE;
+		philo->have_eaten = 0;
+		i++;
+	}
+	return (SUCCESS);
+}
+
 int	init_nb_philo(char **argv)
 {
 	t_data			*data;
-	t_philo			*philo;
-	int				i;
 
 	data = _data();
 	data->nb_philo = ft_atoi(argv[1]);
@@ -39,13 +57,7 @@ int	init_nb_philo(char **argv)
 		ft_putstr("Memory alloc failed\n");
 		return (FAILURE);
 	}
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		philo = _philo(i);
-		philo->nb = i + 1;
-		i++;
-	}
+	init_philo_data();
 	return (SUCCESS);
 }
 
@@ -58,14 +70,16 @@ int	init_divers(int argc)
 	data->philo_is_dead = FALSE;
 	return (SUCCESS);
 }
+
+// * 1000 conversion milliseconde en microseconde pour usleep
 int	init_time_to(char **argv, int argc)
 {
 	t_data	*data;
 
 	data = _data();
 	data->time_to_die = ft_atoi(argv[2]);
-	data->time_to_eat = ft_atoi(argv[3]);
-	data->time_to_sleep = ft_atoi(argv[4]);
+	data->time_to_eat = ft_atoi(argv[3]) * 1000;
+	data->time_to_sleep = ft_atoi(argv[4]) * 1000;
 	if (argc == 6)
 		data->max_eat = ft_atoi(argv[5]);
 	return (SUCCESS);

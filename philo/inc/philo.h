@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/16 21:08:38 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/17 21:26:30 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define ATOI_FAILURE -1
 # define TRUE 1
 # define FALSE 0
+# define NO_DEAD -1
 
 typedef struct timeval t_timeval;
 
@@ -37,16 +38,18 @@ typedef struct s_time_start
 typedef struct s_philo
 {
 	int				nb;
+	int				index;
 	pthread_t		id;
 	int				have_eaten;
-	int				time_last_meal;
-
+	int				time_last_meal; //temps en ms
+	int				finish_eating;
 }	t_philo;
 
 typedef struct s_mutex
 {
 	pthread_mutex_t	printf;
 	pthread_mutex_t	time_last_meal;
+	pthread_mutex_t	philo_is_dead;
 }	t_mutex;
 
 typedef struct s_data
@@ -68,18 +71,18 @@ t_data	*_data(void);
 t_philo	*_philo(int i);
 
 //PHILO ACTION
-int	philo_sleeping(int philo_nb);
-int	philo_eating(int philo_nb);
-int	philo_take_fork(int philo_nb);
-int	philo_thinking(int philo_nb);
-int	philo_died(int philo_nb);
+int	philo_sleeping(t_philo *philo);
+int	philo_eating(t_philo *philo);
+int	philo_take_fork(t_philo *philo);
+int	philo_thinking(t_philo *philo);
+int	philo_died(t_philo *philo);
 
 //PHILO PRINTF
-int	philo_printf_sleeping(int philo_nb);
-int	philo_printf_eating(int philo_nb);
-int	philo_printf_take_fork(int philo_nb);
-int	philo_printf_thinking(int philo_nb);
-int	philo_printf_died(int philo_nb);
+int	philo_printf_sleeping(t_philo *philo);
+int	philo_printf_eating(t_philo *philo);
+int	philo_printf_take_fork(t_philo *philo);
+int	philo_printf_thinking(t_philo *philo);
+int	philo_printf_died(t_philo *philo);
 
 // TIME UTILS
 int	init_start_time(void);
@@ -106,5 +109,12 @@ void	free_data(void);
 //THREAD
 int	init_thread(void);
 int	join_thread(void);
+
+//CHECK DEAD
+void	check_dead(void);
+
+//MUTEX
+int check_status_philo_is_dead(t_data *data);
+
 
 #endif
