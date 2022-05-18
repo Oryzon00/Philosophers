@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:28:35 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/17 21:01:15 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/18 18:12:34 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	philo_printf_thinking(t_philo *philo)
 	return (SUCCESS);
 }
 
-int	philo_printf_died(t_philo *philo)
+int	philo_printf_died(int philo_who_died)
 {
 	t_data	*data;
 	int		timestamp;
@@ -81,7 +81,7 @@ int	philo_printf_died(t_philo *philo)
 	data = _data();
 	//pthread_mutex_lock(&(data->mutex.printf));
 	timestamp = get_timestamp();
-	printf("%d \tphilo %d died\n", timestamp, philo->nb);
+	printf("%d \tphilo %d died\n", timestamp, philo_who_died);
 	pthread_mutex_unlock(&(data->mutex.printf));
 	return (SUCCESS);
 }

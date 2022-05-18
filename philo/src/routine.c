@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:16:06 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/17 21:23:47 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/18 21:45:21 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,38 @@ int not_dead_and_must_eat(t_philo *philo)
 	data = _data();
 	if (data->argc == 5)
 	{
-		if (data->philo_is_dead == TRUE)
+		if (get_status_philo_is_dead() == TRUE)
 			return (FAILURE);
 	}
 	else if (data->argc == 6)
 	{
-		if (data->philo_is_dead == TRUE | philo->have_eaten >= data->max_eat)
+		if (get_status_philo_is_dead() == TRUE | philo->have_eaten >= data->max_eat)
 			return (FAILURE);
 	}
 	return (SUCCESS);
+}
+
+//coder fct calcul check philo dead
+int	calculate_if_philo_dead(t_philo *philo)
+{
+	t_timeval	time_now;
+	t_data		*data;
+
+	data = _data();
+	gettimeofday(&time_now, NULL);
+	if (time_now.tv_sec * 1000 + time_now.tv_usec / 1000 - get_status_time_last_meal(philo)
+		>= data->time_to_die)
+	{
+		dprintf(2, "calcul = %d\n", time_now.tv_sec * 1000 + time_now.tv_usec / 1000 - get_status_time_last_meal(philo)
+					>= (unsigned long) data->time_to_die);
+		change_status_philo_is_dead(TRUE);
+		change_status_philo_who_died(philo->nb);
+	}
+	if (get_status_philo_is_dead() == TRUE)
+		return (DEAD);
+	else
+		return (NOT_DEAD);
+
 }
 
 
@@ -43,17 +66,12 @@ void	*ft_routine(void *philo_ptr)
 	while (not_dead_and_must_eat(philo) == SUCCESS)
 	{
 		philo_thinking(philo);
-		if (check_status_philo_is_dead(data) == TRUE)
-			break ;
-		usleep(1000);
+		if (calculate_if_philo_dead(philo) == DEAD)
+			break ;	
 		philo_eating(philo);
-		if (check_status_philo_is_dead(data) == TRUE)
+		if (calculate_if_philo_dead(philo) == DEAD)
 			break ;
-		usleep(1000);
 		philo_sleeping(philo);
-		if (check_status_philo_is_dead(data) == TRUE)
-			break ;
-		usleep(1000);
 	}
 	if (philo->have_eaten >= data->max_eat)
 		philo->finish_eating = TRUE;

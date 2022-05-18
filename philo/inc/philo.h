@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/17 21:26:30 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/18 21:45:00 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@
 # define ATOI_FAILURE -1
 # define TRUE 1
 # define FALSE 0
-# define NO_DEAD -1
+# define DEAD 1
+# define NOT_DEAD 0
 
 typedef struct timeval t_timeval;
 
@@ -41,7 +42,7 @@ typedef struct s_philo
 	int				index;
 	pthread_t		id;
 	int				have_eaten;
-	int				time_last_meal; //temps en ms
+	unsigned long	time_last_meal; //temps en ms
 	int				finish_eating;
 }	t_philo;
 
@@ -50,6 +51,7 @@ typedef struct s_mutex
 	pthread_mutex_t	printf;
 	pthread_mutex_t	time_last_meal;
 	pthread_mutex_t	philo_is_dead;
+	pthread_mutex_t	philo_who_died;
 }	t_mutex;
 
 typedef struct s_data
@@ -58,6 +60,7 @@ typedef struct s_data
 	t_mutex			mutex;
 	t_time_start	time;
 	int				philo_is_dead;
+	int				philo_who_died;
 	int				nb_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -82,7 +85,7 @@ int	philo_printf_sleeping(t_philo *philo);
 int	philo_printf_eating(t_philo *philo);
 int	philo_printf_take_fork(t_philo *philo);
 int	philo_printf_thinking(t_philo *philo);
-int	philo_printf_died(t_philo *philo);
+int	philo_printf_died(int philo_who_died);
 
 // TIME UTILS
 int	init_start_time(void);
@@ -114,7 +117,13 @@ int	join_thread(void);
 void	check_dead(void);
 
 //MUTEX
-int check_status_philo_is_dead(t_data *data);
+int get_status_philo_is_dead(void);
+int	change_status_philo_is_dead(int status);
+int get_status_philo_who_died(void);
+int	change_status_philo_who_died(int status);
+unsigned long	get_status_time_last_meal(t_philo *philo);
+int	change_status_time_last_meal(t_philo *philo);
+
 
 
 #endif

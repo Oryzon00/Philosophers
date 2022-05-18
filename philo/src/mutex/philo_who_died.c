@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_eating.c                                     :+:      :+:    :+:   */
+/*   philo_who_died.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 21:00:40 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/18 18:40:59 by ajung            ###   ########.fr       */
+/*   Created: 2022/05/18 17:56:08 by ajung             #+#    #+#             */
+/*   Updated: 2022/05/18 21:34:39 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-int	philo_eating(t_philo *philo)
+int	change_status_philo_who_died(int status)
 {
-	t_data		*data;
+	t_data	*data;
 
 	data = _data();
-	philo_printf_eating(philo);
-	change_status_time_last_meal(philo);
-	philo->have_eaten++;
-	usleep(data->time_to_eat);
+	pthread_mutex_lock(&data->mutex.philo_who_died);
+	data->philo_who_died = status;
+	pthread_mutex_unlock(&data->mutex.philo_who_died);
 	return (SUCCESS);
+}
+
+
+int get_status_philo_who_died(void)
+{
+	t_data	*data;
+	int		ret;
+
+	data=_data();
+	pthread_mutex_lock(&data->mutex.philo_who_died);
+	ret = data->philo_who_died;
+	pthread_mutex_unlock(&data->mutex.philo_who_died);
+	return (ret);
 }

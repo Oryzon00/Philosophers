@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:03:46 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/16 21:01:19 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/18 18:40:00 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	init_time_last_meal(void)
 	{
 		philo = _philo(i);
 		gettimeofday(&time_now, NULL);
-		philo->time_last_meal = time_now.tv_usec / 1000;
+		change_status_time_last_meal(philo);
 		i++;
 	}
 	return (SUCCESS);
