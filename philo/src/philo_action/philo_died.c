@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:56:32 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/17 15:59:02 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/18 18:16:26 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	philo_died(t_philo *philo)
 {
-	philo_printf_died(philo);
+	philo_printf_died(philo->nb);
 	return (SUCCESS);
 }

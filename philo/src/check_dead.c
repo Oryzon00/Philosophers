@@ -6,14 +6,14 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:12:22 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/17 21:27:33 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/18 21:37:39 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 //time temps actuel - time_since_last_meal >= time_to_die -->dead
-static t_philo	*calcule_if_philo_dead(t_data *data)
+/* static t_philo	*calcule_if_philo_dead(t_data *data)
 {
 	t_philo		*philo;
 	t_timeval	time_now;
@@ -36,7 +36,7 @@ static t_philo	*calcule_if_philo_dead(t_data *data)
 	}
 	return (NULL);
 }
-
+ */
 static int	check_all_have_eaten(t_data *data)
 {
 	t_philo	*philo;
@@ -57,15 +57,12 @@ static int	check_all_have_eaten(t_data *data)
 		return (FALSE);
 }
 
-static int stop_routine(t_data *data, t_philo *philo)
+static int stop_routine(t_data *data)
 {
 	
 	pthread_mutex_lock(&data->mutex.printf);
-	pthread_mutex_lock(&data->mutex.philo_is_dead);
-	data->philo_is_dead = TRUE;
-	pthread_mutex_unlock(&data->mutex.philo_is_dead);
 	usleep(1000);
-	philo_printf_died(philo);
+	philo_printf_died(get_status_philo_who_died());
 	return (SUCCESS);
 	
 }
@@ -73,17 +70,13 @@ static int stop_routine(t_data *data, t_philo *philo)
 void	check_dead(void)
 {
 	t_data		*data;
-	t_philo		*philo_dead;
 
 	data = _data();
-	while (data->philo_is_dead == FALSE)
+	while (get_status_philo_is_dead() == FALSE
+		&& check_all_have_eaten(data) == FALSE)
 	{
-		philo_dead = calcule_if_philo_dead(data);
-		if (philo_dead != NULL)
-			stop_routine(data, philo_dead);
-		else if (check_all_have_eaten(data) == TRUE)
-			return ;
-		else
-			usleep(1000);
+		usleep(100);
 	}
+	if (get_status_philo_is_dead() == TRUE)
+		stop_routine(data);
 }

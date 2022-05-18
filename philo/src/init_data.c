@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:16:15 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/17 21:05:37 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/18 17:55:24 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	init_mutex()
 	data = _data();
 	pthread_mutex_init(&(data->mutex.printf), NULL);
 	pthread_mutex_init(&(data->mutex.time_last_meal), NULL);
+	pthread_mutex_init(&(data->mutex.philo_who_died), NULL);
 
 	return (SUCCESS);
 	
@@ -68,6 +69,7 @@ int	init_divers(int argc)
 	data = _data();
 	data->argc = argc;
 	data->philo_is_dead = FALSE;
+	data->philo_who_died = -1;
 	return (SUCCESS);
 }
 

@@ -17,7 +17,9 @@ SRC =	src/main.c \
 		src/philo_action/philo_sleeping.c \
 		src/philo_action/philo_eating.c \
 		src/check_dead.c \
-		src/mutex/check_status_philo_is_dead.c \
+		src/mutex/philo_is_dead.c \
+		src/mutex/philo_who_died.c \
+		src/mutex/time_last_meal.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -35,7 +37,7 @@ NAME = philo
 
 INC_DIR = inc
 
-ARG_PHILO = 5 1000 10000 201
+ARG_PHILO = 4 1000 200 200 5
 
 %.o: %.c
 		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@
