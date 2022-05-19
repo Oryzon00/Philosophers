@@ -6,32 +6,28 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:58:12 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/18 20:25:34 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/19 16:56:34 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	can_wait(t_philo *philo)
+
+static int	calculate_if_philo_can_wait(t_philo *philo)
 {
-/* 	t_data		*data;
-	t_timeval	time_now;
+	t_data		*data;
 
 	data = _data();
-	gettimeofday(&time_now, NULL);
-	if (time_now.tv_usec / 1000 - get_status_time_last_meal(philo)
-		> data->time_to_die / 2)
-		return (TRUE);
+	if (time_since_last_meal(philo) >= data->time_to_die / 2)
+		return (CAN_NOT_WAIT);
 	else
-		return (FALSE); */
-	(void) philo;
-	return (FALSE);
+		return (CAN_WAIT);
 }
 
 int	philo_thinking(t_philo *philo)
 {
 	philo_printf_thinking(philo);
-	while(can_wait(philo) == TRUE)
-		usleep(1000);
+	while(calculate_if_philo_can_wait(philo) == CAN_WAIT)
+		usleep(100);
 	return (SUCCESS);
 }

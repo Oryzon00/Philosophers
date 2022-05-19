@@ -6,33 +6,33 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 18:23:30 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/18 21:43:35 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/19 16:17:13 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-unsigned long	get_status_time_last_meal(t_philo *philo)
+t_timeval	get_status_time_last_meal(t_philo *philo)
 {
-	t_data				*data;
-	unsigned long		ret;
+	t_data		*data;
+	t_timeval	time_last_meal;
 	
 	data = _data();
 	pthread_mutex_lock(&data->mutex.time_last_meal);
-	ret = philo->time_last_meal;
+	time_last_meal = philo->time_last_meal;
 	pthread_mutex_unlock(&data->mutex.time_last_meal);
-	return (ret);
+	return (time_last_meal);
 }
 
 int	change_status_time_last_meal(t_philo *philo)
 {
 	t_data		*data;
-	t_timeval	time_now;
+	t_timeval	time_last_meal;
 
 	data = _data();
 	pthread_mutex_lock(&(data->mutex.time_last_meal));
-	gettimeofday(&time_now, NULL);
-	philo->time_last_meal = time_now.tv_sec * 1000 + time_now.tv_usec / 1000;
+	gettimeofday(&time_last_meal, NULL);
+	philo->time_last_meal = time_last_meal;
 	pthread_mutex_unlock(&(data->mutex.time_last_meal));
 	return (SUCCESS);
 }
