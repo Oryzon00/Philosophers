@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/18 21:45:00 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/19 18:28:38 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define FALSE 0
 # define DEAD 1
 # define NOT_DEAD 0
+# define CAN_WAIT 1
+# define CAN_NOT_WAIT 0
 
 typedef struct timeval t_timeval;
 
@@ -42,7 +44,7 @@ typedef struct s_philo
 	int				index;
 	pthread_t		id;
 	int				have_eaten;
-	unsigned long	time_last_meal; //temps en ms
+	t_timeval		time_last_meal; 
 	int				finish_eating;
 }	t_philo;
 
@@ -90,6 +92,11 @@ int	philo_printf_died(int philo_who_died);
 // TIME UTILS
 int	init_start_time(void);
 int	get_timestamp(void);
+int	calculate_if_philo_dead(t_philo *philo);
+int	time_since_last_meal(t_philo *philo);
+int	ft_usleep(int nb);
+
+
 
 //CHECK INPUT
 int	check_input(int argc, char ** argv);
@@ -117,12 +124,17 @@ int	join_thread(void);
 void	check_dead(void);
 
 //MUTEX
-int get_status_philo_is_dead(void);
-int	change_status_philo_is_dead(int status);
-int get_status_philo_who_died(void);
-int	change_status_philo_who_died(int status);
-unsigned long	get_status_time_last_meal(t_philo *philo);
-int	change_status_time_last_meal(t_philo *philo);
+//PHILO_IS_DEAD
+int 		get_status_philo_is_dead(void);
+int			change_status_philo_is_dead(int status);
+
+//PHILO_WHO_DIED
+int 		get_status_philo_who_died(void);
+int			change_status_philo_who_died(int status);
+
+//TIME_LAST_MEAL
+t_timeval	get_status_time_last_meal(t_philo *philo);
+int			change_status_time_last_meal(t_philo *philo);
 
 
 

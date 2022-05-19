@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 19:03:46 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/18 18:40:00 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/19 18:28:19 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 int	init_time_last_meal(void)
 {
-	t_timeval	time_now;
 	t_philo		*philo;
 	int			i;
 	t_data		*data;
@@ -26,7 +25,6 @@ int	init_time_last_meal(void)
 	while (i < data->nb_philo)
 	{
 		philo = _philo(i);
-		gettimeofday(&time_now, NULL);
 		change_status_time_last_meal(philo);
 		i++;
 	}
@@ -58,4 +56,45 @@ int	get_timestamp(void)
 				 + (time.tv_usec / 1000 - data->time.start_ms);
 
 	return (timestamp);
+}
+
+int	time_since_last_meal(t_philo *philo)
+{
+	t_timeval	time_now;
+	t_timeval	time_last_meal;
+	t_data		*data;
+
+	data = _data();	
+	gettimeofday(&time_now, NULL);
+	time_last_meal = get_status_time_last_meal(philo);
+	return ((time_now.tv_sec - time_last_meal.tv_sec) * 1000
+		+ (time_now.tv_usec - time_last_meal.tv_usec) / 1000);
+}
+
+int	calculate_if_philo_dead(t_philo *philo)
+{
+	t_data		*data;
+
+	data = _data();
+	if (time_since_last_meal(philo) >= data->time_to_die)
+		return (DEAD);
+	else
+		return (NOT_DEAD);
+}
+
+int	ft_usleep(int nb)
+{
+	int	i;
+	int	usleep_to_do;
+
+	usleep_to_do = nb / 100;
+	i = 0;
+	while (i < usleep_to_do)
+	{
+		usleep(100);
+		i++;
+	}
+	usleep_to_do = nb % 100;
+	usleep(usleep_to_do);
+	return (SUCCESS);
 }
