@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:12:22 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/19 18:20:09 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/20 18:03:40 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	check_all_have_eaten(t_data *data)
 	while (i < data->nb_philo)
 	{
 		philo = _philo(i);
-		if (philo->finish_eating == FALSE)
+		if (get_status_finish_eating(philo) == FALSE)
 			return (FALSE);
 		else
 			i++;
@@ -36,7 +36,7 @@ static int stop_routine_dead(t_data *data)
 {
 	
 	pthread_mutex_lock(&data->mutex.printf);
-	usleep(1000);
+	usleep(2000);
 	philo_printf_died(get_status_philo_who_died());
 	pthread_mutex_unlock(&data->mutex.printf);
 	return (SUCCESS);
