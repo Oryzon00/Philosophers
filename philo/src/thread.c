@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 19:56:23 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/19 18:21:05 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/23 20:00:35 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,17 @@ int	init_thread(void)
 	while (i < data->nb_philo)
 	{
 		philo = _philo(i);
-		philo->nb = i + 1;
-		pthread_create(&(philo->id), NULL, &ft_routine, philo);
+		if (philo->nb % 2 == 0)
+			pthread_create(&(philo->id), NULL, &ft_routine, philo);
+		i++;
+	}
+	usleep(100);
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		philo = _philo(i);
+		if (philo->nb % 2 == 1)
+			pthread_create(&(philo->id), NULL, &ft_routine, philo);
 		i++;
 	}
 	return (SUCCESS);

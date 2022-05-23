@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:32:21 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 16:53:50 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/23 20:21:12 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	check_param_is_positive_int(char **argv, int argc)
 	}
 	if (argc == 6
 		&& ft_atoi(argv[5]) == ATOI_FAILURE)
-		{
-			ft_putstr("Error: Parameters are not positive int\n");
-			return (FAILURE);
-		}
+	{
+		ft_putstr("Error: Parameters are not positive int\n");
+		return (FAILURE);
+	}
 	return (SUCCESS);
 }
 
@@ -53,12 +53,12 @@ int	check_value_param(char **argv)
 		| ft_atoi(argv[4]) < 60)
 	{
 		ft_putstr("Error: time to die, eat or sleep must be above 60\n");
-		return (FAILURE);	
+		return (FAILURE);
 	}
 	return (SUCCESS);
 }
 
-int	check_input(int argc, char ** argv)
+int	check_input(int argc, char **argv)
 {
 	(void) argv;
 	if (check_nb_param(argc) == FAILURE)

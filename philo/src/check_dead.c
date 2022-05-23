@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:12:22 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/20 18:03:40 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/23 20:20:38 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ static int	check_all_have_eaten(t_data *data)
 		return (FALSE);
 }
 
-static int stop_routine_dead(t_data *data)
+static int	stop_routine_dead(t_data *data)
 {
-	
 	pthread_mutex_lock(&data->mutex.printf);
 	usleep(2000);
 	philo_printf_died(get_status_philo_who_died());

@@ -6,13 +6,25 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:16:06 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/20 18:49:56 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/23 20:44:46 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int not_dead_and_must_eat(t_philo *philo)
+static void	check_nb_philo_valable(void)
+{
+	t_data	*data;
+
+	data = _data();
+	if (data->nb_philo <= 1)
+	{
+		change_status_philo_is_dead(TRUE);
+		change_status_philo_who_died(1);
+	}
+}
+
+int	not_dead_and_must_eat(t_philo *philo)
 {
 	t_data	*data;
 
@@ -38,17 +50,21 @@ int not_dead_and_must_eat(t_philo *philo)
 void	*ft_routine(void *philo_ptr)
 {
 	t_data	*data;
-	t_philo *philo;
+	t_philo	*philo;
 	int		philo_dead;
 
 	data = _data();
 	philo = philo_ptr;
 	philo_dead = FALSE;
+	check_nb_philo_valable();
 	while (not_dead_and_must_eat(philo) == SUCCESS)
 	{
 		philo_thinking(philo);
 		if (check_if_philo_dead(philo) == DEAD)
-			break ;	
+			break ;
+		philo_take_fork(philo);
+		if (check_if_philo_dead(philo) == DEAD)
+			break ;
 		philo_eating(philo);
 		if (check_if_philo_dead(philo) == DEAD)
 			break ;
@@ -56,5 +72,6 @@ void	*ft_routine(void *philo_ptr)
 		if (check_if_philo_dead(philo) == DEAD)
 			break ;
 	}
+	drop_fork(philo);
 	return (NULL);
 }
