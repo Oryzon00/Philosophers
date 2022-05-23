@@ -2,7 +2,8 @@ SRC =	src/main.c \
 		src/singleton.c \
 		src/routine.c \
 		src/check_input.c \
-		src/init_data.c \
+		src/init_data/init_data.c \
+		src/init_data/init_data2.c \
 		src/free_data.c \
 		src/thread.c \
 		src/time_utils.c \
@@ -38,7 +39,7 @@ NAME = philo
 
 INC_DIR = inc
 
-ARG_PHILO = 4 100 1000000 400 
+ARG_PHILO = 200 1000 1 200 
 
 %.o: %.c
 		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@
