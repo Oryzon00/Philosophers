@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_dead.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oryzon <oryzon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:12:22 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/24 21:16:37 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/25 00:43:46 by oryzon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,5 @@ void	check_dead(void)
 		usleep(100);
 	if (get_status_philo_is_dead() == TRUE)
 		stop_routine_dead(data);
-	dprintf(2, "end check dead\n");
 	return ;
 }

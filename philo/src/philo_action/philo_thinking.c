@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_thinking.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oryzon <oryzon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:58:12 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/24 18:26:34 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/25 00:46:13 by oryzon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,12 @@ int	philo_thinking(t_philo *philo)
 		return (FAILURE);
 	data = _data();
 	time_to_live = calculate_time_to_live(philo);
-	//dprintf(2, "time to live = %d\n", time_to_live);
 	philo_printf_thinking(philo);
 	if (data->time_to_eat > data->time_to_sleep
 		&& data->time_to_eat - data->time_to_sleep < time_to_live * 1)
-		{
-			//dprintf(2, "in condition\n");
-			ft_usleep(philo, (data->time_to_eat - data->time_to_sleep) * 1000);
-			//usleep((data->time_to_eat - data->time_to_sleep) * 1000);
-		}
-		
+	{
+		ft_usleep(philo, (data->time_to_eat - data->time_to_sleep) * 1000);
+	}
 	else
 		usleep(1000);
 	return (SUCCESS);
