@@ -40,7 +40,7 @@ NAME = philo
 
 INC_DIR = inc
 
-ARG_PHILO = 10 1000 200 200 1
+ARG_PHILO = 200 1000 200 200 1
 
 %.o: %.c
 		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@
@@ -48,8 +48,8 @@ ARG_PHILO = 10 1000 200 200 1
 all: $(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) ${THREAD} $(OBJ) -o $(NAME) $(DE
-BUG)
+			$(CC) $(CFLAGS) ${THREAD} $(OBJ) -o $(NAME) $(DEBUG)
+
 clean:
 		rm -f $(OBJ)
 
