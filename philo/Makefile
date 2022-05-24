@@ -6,7 +6,8 @@ SRC =	src/main.c \
 		src/init_data/init_data2.c \
 		src/free_data.c \
 		src/thread.c \
-		src/time_utils.c \
+		src/time_utils/time_utils.c \
+		src/time_utils/time_utils2.c \
 		src/not_libft/ft_atoi.c \
 		src/not_libft/ft_strlen.c \
 		src/not_libft/ft_putstr.c \
@@ -39,7 +40,7 @@ NAME = philo
 
 INC_DIR = inc
 
-ARG_PHILO = 200 1000 1 200 
+ARG_PHILO = 8 410 200 200 20
 
 %.o: %.c
 		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@
