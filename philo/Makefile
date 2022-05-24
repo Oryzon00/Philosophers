@@ -28,7 +28,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = clang
 
-DEBUG = -fsanitize=address 
+DEBUG = -fsanitize=thread 
 
 CFLAGS = -Wall -Wextra -Werror -g3 
 
@@ -40,7 +40,7 @@ NAME = philo
 
 INC_DIR = inc
 
-ARG_PHILO = 0 10000 200 200 5
+ARG_PHILO = 10 1000 200 200 1
 
 %.o: %.c
 		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@
@@ -48,8 +48,8 @@ ARG_PHILO = 0 10000 200 200 5
 all: $(NAME)
 
 $(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) ${THREAD} $(OBJ) -o $(NAME)
-
+			$(CC) $(CFLAGS) ${THREAD} $(OBJ) -o $(NAME) $(DE
+BUG)
 clean:
 		rm -f $(OBJ)
 
