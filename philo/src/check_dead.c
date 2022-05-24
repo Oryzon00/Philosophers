@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 19:12:22 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/23 20:20:38 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 17:59:19 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	stop_routine_max_eat(void)
 
 	data = _data();
 	pthread_mutex_lock(&data->mutex.printf);
-	dprintf(2, "----- All philos have eaten enough -----\n");
+	printf("----- All philos have eaten enough -----\n");
 	pthread_mutex_unlock(&data->mutex.printf);
 	return (SUCCESS);
 }

@@ -6,11 +6,11 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:36:08 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/09 18:38:50 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 14:39:22 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 int	ft_putstr(char *str)
 {

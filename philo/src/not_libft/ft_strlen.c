@@ -6,18 +6,18 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:38:09 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/11 16:45:01 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 14:39:29 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+#include "philo.h"
 
 int	ft_strlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
