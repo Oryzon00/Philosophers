@@ -40,7 +40,7 @@ NAME = philo
 
 INC_DIR = inc
 
-ARG_PHILO = 200 1000 200 200 1
+ARG_PHILO = 5 610 200 200 20
 
 %.o: %.c
 		$(CC) $(CFLAGS) -I ${INC_DIR} ${THREAD} -c $< -o $@

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oryzon <oryzon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 19:46:53 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/24 21:23:05 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/25 00:44:33 by oryzon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,4 @@ void	free_data(void)
 	i = 0;
 	free(data->philo);
 	free(data->mutex.fork);
-	//destroy mes mutex
 }

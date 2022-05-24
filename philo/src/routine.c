@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
+/*   By: oryzon <oryzon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:16:06 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/24 21:18:27 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/25 00:43:57 by oryzon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ void	*ft_routine(void *philo_ptr)
 			break ;
 	}
 	drop_fork(philo);
-	dprintf(2, "philo %d is over\n", philo->nb);
 	return (NULL);
 }
