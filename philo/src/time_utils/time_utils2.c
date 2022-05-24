@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 14:28:59 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/24 15:36:12 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 18:31:17 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,21 @@ int	diff_time(t_timeval t1, t_timeval t2)
 	return ((t1.tv_sec - t2.tv_sec) * 1000 + (t1.tv_usec - t2.tv_usec) / 1000);
 }
 
-int	ft_usleep(t_philo *philo, int msec)
+int	ft_usleep(t_philo *philo, int microsec)
 {
 	t_timeval		t1;
 	t_timeval		t2;
 	t_data			*data;
+	int				ms;
 
 	data = _data();
 	(void) philo;
-	if (msec < 0)
+	if (microsec < 0)
 		return (FAILURE);
+	ms = microsec / 1000;
 	gettimeofday(&t1, NULL);
 	gettimeofday(&t2, NULL);
-	while (diff_time(t1, t2) < msec + 1)
+	while (diff_time(t1, t2) < ms + 1)
 	{
 		if (check_if_philo_dead(philo) == DEAD)
 			break ;

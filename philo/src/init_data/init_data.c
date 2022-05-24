@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 16:16:15 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/23 20:22:50 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 18:18:17 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static int	init_philo_data(void)
 		philo->nb = i + 1;
 		philo->finish_eating = FALSE;
 		philo->have_eaten = 0;
+		philo->right_fork = NULL;
+		philo->left_fork = NULL;
 		i++;
 	}
 	return (SUCCESS);

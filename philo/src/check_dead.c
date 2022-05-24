@@ -41,7 +41,7 @@ static int	stop_routine_dead(t_data *data)
 	return (SUCCESS);
 }
 
-static int	stop_routine_max_eat(void)
+/* static int	stop_routine_max_eat(void)
 {
 	t_data	*data;
 
@@ -50,7 +50,7 @@ static int	stop_routine_max_eat(void)
 	printf("----- All philos have eaten enough -----\n");
 	pthread_mutex_unlock(&data->mutex.printf);
 	return (SUCCESS);
-}
+}*/
 
 void	check_dead(void)
 {
@@ -62,7 +62,5 @@ void	check_dead(void)
 		usleep(100);
 	if (get_status_philo_is_dead() == TRUE)
 		stop_routine_dead(data);
-	else if (check_all_have_eaten(data) == TRUE)
-		stop_routine_max_eat();
 	return ;
 }

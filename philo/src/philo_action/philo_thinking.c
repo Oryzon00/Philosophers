@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:58:12 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/24 18:10:54 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 18:26:34 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	philo_thinking(t_philo *philo)
 	philo_printf_thinking(philo);
 	if (data->time_to_eat > data->time_to_sleep
 		&& data->time_to_eat - data->time_to_sleep < time_to_live)
-		usleep((data->time_to_eat - data->time_to_sleep) * 1100);
+		ft_usleep(philo, (data->time_to_eat - data->time_to_sleep) * 1100);
 	else
 		usleep(1000);
 	return (SUCCESS);
