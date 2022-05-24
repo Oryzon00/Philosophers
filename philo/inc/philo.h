@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 19:24:51 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/23 20:23:24 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 18:27:06 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int			init_start_time(void);
 int			get_timestamp(void);
 int			calculate_if_philo_dead(t_philo *philo);
 int			time_since_last_meal(t_philo *philo);
-int			ft_usleep(t_philo *philo, int msec);
+int			ft_usleep(t_philo *philo, int microsec);
 int			diff_time(t_timeval t1, t_timeval t2);
 int			check_if_philo_dead(t_philo *philo);
 

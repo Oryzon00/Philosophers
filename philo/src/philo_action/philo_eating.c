@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 21:00:40 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/23 19:05:44 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 18:27:39 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	philo_eating(t_philo *philo)
 	philo_printf_eating(philo);
 	change_status_time_last_meal(philo);
 	philo->have_eaten++;
-	ft_usleep(philo, data->time_to_eat);
+	ft_usleep(philo, data->time_to_eat * 1000);
 	drop_fork(philo);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 17:16:06 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/23 20:44:46 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 18:49:01 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ static void	check_nb_philo_valable(void)
 	t_data	*data;
 
 	data = _data();
-	if (data->nb_philo <= 1)
+	if (data->nb_philo < 1)
 	{
+		change_status_philo_is_dead(TRUE);
+		change_status_philo_who_died(1);
+	}
+	else if (data->nb_philo == 1)
+	{
+		usleep(data->time_to_die * 1000);
 		change_status_philo_is_dead(TRUE);
 		change_status_philo_who_died(1);
 	}
