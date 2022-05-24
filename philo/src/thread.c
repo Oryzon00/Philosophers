@@ -6,7 +6,7 @@
 /*   By: ajung <ajung@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 19:56:23 by ajung             #+#    #+#             */
-/*   Updated: 2022/05/24 18:56:20 by ajung            ###   ########.fr       */
+/*   Updated: 2022/05/24 21:20:54 by ajung            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	init_thread(void)
 	while (i < data->nb_philo)
 	{
 		philo = _philo(i);
-		if (philo->nb % 2 == 0)
+		if (philo && philo->nb % 2 == 0)
 			pthread_create(&(philo->id), NULL, &ft_routine, philo);
 		i++;
 	}
@@ -32,8 +32,9 @@ int	init_thread(void)
 	while (i < data->nb_philo)
 	{
 		philo = _philo(i);
-		if (philo->nb % 2 == 1)
-			pthread_create(&(philo->id), NULL, &ft_routine, philo);
+		if (philo && philo->nb % 2 == 1)
+			if (pthread_create(&(philo->id), NULL, &ft_routine, philo) > 0)
+				dprintf(2, "---------------PTHREAD CREATE C'EST DE LA MERDE\n----------");
 		i++;
 	}
 	return (SUCCESS);
@@ -47,11 +48,14 @@ int	join_thread(void)
 
 	data = _data();
 	i = 0;
+	dprintf(2, "start join thread\n");
 	while (i < data->nb_philo)
 	{
 		philo = _philo(i);
-		pthread_join(philo->id, NULL);
+		if (philo)
+			pthread_join(philo->id, NULL);
 		i++;
 	}
+	dprintf(2, "end join thread\n");
 	return (SUCCESS);
 }

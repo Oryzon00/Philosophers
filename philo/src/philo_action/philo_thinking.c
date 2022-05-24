@@ -35,10 +35,16 @@ int	philo_thinking(t_philo *philo)
 		return (FAILURE);
 	data = _data();
 	time_to_live = calculate_time_to_live(philo);
+	//dprintf(2, "time to live = %d\n", time_to_live);
 	philo_printf_thinking(philo);
 	if (data->time_to_eat > data->time_to_sleep
-		&& data->time_to_eat - data->time_to_sleep < time_to_live)
-		ft_usleep(philo, (data->time_to_eat - data->time_to_sleep) * 1100);
+		&& data->time_to_eat - data->time_to_sleep < time_to_live * 1)
+		{
+			//dprintf(2, "in condition\n");
+			ft_usleep(philo, (data->time_to_eat - data->time_to_sleep) * 1000);
+			//usleep((data->time_to_eat - data->time_to_sleep) * 1000);
+		}
+		
 	else
 		usleep(1000);
 	return (SUCCESS);
